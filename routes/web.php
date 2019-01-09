@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Authentication Routes...
 Route::get('/login', 'Auth\LoginController@showLoginFrom');
 Route::post('/login', 'Auth\LoginController@login') ->name('login');
@@ -25,11 +21,13 @@ Route::get('/register', 'Auth\RegisterController@show');
 Route::post('/register', 'Auth\RegisterController@register')->name('register');
 
 // Show
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/plan/{plan}', 'PlanController@show');
-Route::get('/plan', 'PlanController@index');
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/plan/{plan}', 'PlanController@show')->name('plan.detailed');
+Route::get('/plan', 'PlanController@list')->name('plan.list');
 
 // Admin
-Route::prefix('admin')->group(function () {
-
-})->middleware('auth');
+Route::prefix('admin/')->middleware(['auth'])->group(function () {
+    Route::resource('plan', 'Admin\PlanController');
+    Route::resource('student', 'Admin\StudentController');
+    Route::resource('problem', 'Admin\ProblemController');
+});

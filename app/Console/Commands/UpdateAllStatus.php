@@ -4,21 +4,21 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class UpdateStudentProblemStatus extends Command
+class UpdateAllStatus extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'update:stu_problem';
+    protected $signature = 'update:all';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'update student problem status';
+    protected $description = 'run update:stu_student and run update:stu_status';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,9 @@ class UpdateStudentProblemStatus extends Command
      */
     public function handle()
     {
-        //
+        $result = $this->call('update:stu_status');
+        $result &= $this->call('update:stu_problem');
+
+        return $result;
     }
 }

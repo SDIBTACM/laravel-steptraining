@@ -27,5 +27,5 @@ interface IFetcherOJ
      * @param Problem $problem
      * @return mixed
      */
-    public function getProblemStatus(StudentAccount $account, Problem $problem);
+    public function getStudentProblemStatus(StudentAccount $account, Problem $problem);
 }

@@ -11,14 +11,14 @@ class UpdateStudentStatus extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'update:stu_status';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'update student solved/rank data';
 
     /**
      * Create a new command instance.
@@ -37,6 +37,6 @@ class UpdateStudentStatus extends Command
      */
     public function handle()
     {
-        //
+        // TODO: add
     }
 }
