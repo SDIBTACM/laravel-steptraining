@@ -8,20 +8,23 @@
 
 namespace App\Units\Monolog;
 
+use Monolog\Formatter\FormatterInterface;
 
-class AppLogFormatter
+class AppLogFormatter implements FormatterInterface
 {
-    /**
-     * Customize the given logger instance.
-     *
-     * @param  \Illuminate\Log\Logger  $logger
-     * @return void
-     */
-    public function __invoke($logger)
+    public function format(array $record)
     {
-        foreach ($logger->getHandlers() as $handler) {
-            $handler->setFormatter(new Formatter());
+        return sprintf("[%s] [%s] [%s] %s\n", $record['datetime']->format('Y-m-d H:i:s.u O'), $record['level_name'], getmypid(), $record['message']);
+    }
+
+    public function formatBatch(array $records)
+    {
+        foreach ($records as $key => $record) {
+            $records[$key] = $this->format($record);
         }
+
+        return $records;
     }
 
 }
+

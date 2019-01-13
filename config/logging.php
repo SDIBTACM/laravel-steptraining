@@ -47,7 +47,7 @@ return [
 
         'app' => [
             'driver' => 'daily',
-            'tap' => [App\Units\Monolog\AppLogFormatter::class],
+            'tap' => [App\Units\Monolog\AppLogger::class],
             'path' => storage_path('logs/app.log'),
             'level' => 'debug',
         ],
