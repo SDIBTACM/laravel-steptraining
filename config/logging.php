@@ -45,6 +45,13 @@ return [
             'level' => 'debug',
         ],
 
+        'app' => [
+            'driver' => 'daily',
+            'tap' => [App\Units\Monolog\AppLogFormatter::class],
+            'path' => storage_path('logs/app.log'),
+            'level' => 'debug',
+        ],
+
         'daily' => [
             'driver' => 'daily',
             'path' => storage_path('logs/laravel.log'),
