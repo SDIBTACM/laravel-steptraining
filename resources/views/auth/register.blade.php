@@ -1,63 +1,90 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+@section('main')
 
-                <div class="card-body">
+    <div class="columns">
+        <div class="column is-one-third is-offset-one-third">
+
+            <div class="el-card">
+                <div class="el-card__header"><p class="title">{{ __('Register') }}</p> </div>
+
+                <div class="el-card__body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label for="username" class="label">{{ __('Username') }}</label></div>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <input id="username" type="text" class="input{{ $errors->has('username') ? ' is-danger' : '' }}" name="username" required value="{{ old('username') }}">
+                                    </div>
+                                    @if ($errors->has('username'))
+                                        <p class="help is-danger">{{ $errors->first('username') }}</p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label for="password" class="label">{{ __('Password') }}</label></div>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <input id="password" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password" required>
+                                    </div>
+                                    @if ($errors->has('password'))
+                                        <p class="help is-danger">{{ $errors->first('password') }}</p>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <div class="field is-horizontal">
+                            <div class="field-label is-normal"><label for="password-confirm" class="label">{{ __('Confirm Password') }}</label></div>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <input id="password-confirm" type="password" class="input{{ $errors->has('password') ? ' is-danger' : '' }}" name="password_confirmation" required>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                <!-- Left empty for spacing -->
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control">
+                                        <button type="submit" class="button is-primary">
+                                            {{ __('Register') }}
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+
+
+
+@endsection
+
+
+@section('script')
+    <script>
+        const data ={
+            data: function () {},
+            methods: {},
+        }
+    </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Log;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -23,8 +24,8 @@ class RegisterController extends Controller
         if ( DB::table('user')->count() )
             return redirect()->route('login');
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+        $validatedData = $request->validate([
+            'username' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
@@ -36,8 +37,9 @@ class RegisterController extends Controller
 
     private function create(array $data)
     {
+        Log::info('username: {} ip: {} register success', $data['user'], Request::ip());
         return User::create([
-            'username' => $data['name'],
+            'username' => $data['username'],
             'password' => Hash::make($data['password']),
             'identity' => 1,
         ]);
