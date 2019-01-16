@@ -3,7 +3,7 @@
  *
  * Created by Dream.
  * User: Boxjan
- * Datetime: 2019-01-09 22:34
+ * Datetime: 2019-01-16 15:34
  */
 
 namespace App\Model;
@@ -11,8 +11,8 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Plan extends Model
+class Category extends Model
 {
-    protected $table = 'plan';
+    protected $table = 'category';
 
 }
