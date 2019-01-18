@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 
 
 class RegisterController extends Controller
@@ -29,18 +28,18 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
 
-        $this->create($request->toArray());
+        $this->create($request);
 
         return redirect()->route('home');
     }
 
 
-    private function create(array $data)
+    private function create(Request $request)
     {
-        Log::info('username: {} ip: {} register success', $data['user'], Request::ip());
+        Log::info('username: {} ip: {} register success', $request->username, $request->getClientIp());
         return User::create([
-            'username' => $data['username'],
-            'password' => Hash::make($data['password']),
+            'username' => $request->input('username'),
+            'password' => Hash::make($request->input('password')),
             'identity' => 1,
         ]);
     }

@@ -32,6 +32,6 @@ class StudentStatus extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_problem_accept_count');
+        Schema::dropIfExists('student_status');
     }
 }

@@ -50,7 +50,7 @@ class LoginController extends Controller
             return redirect()->route('admin.plan.index');
         }
 
-        Log::warning("username: {} Login Fail!", $credentials['username']);
+        Log::warning("username: {}, ip: {} Login Fail!", $credentials['username'], $request->ip());
         return view('auth/login');
     }
 

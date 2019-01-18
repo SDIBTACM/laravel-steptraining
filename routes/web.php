@@ -34,5 +34,5 @@ Route::prefix('admin/')->namespace('Admin')->middleware(['auth'])->name('admin.'
     Route::resource('problem', 'ProblemController')->except(['update', 'edit']);
     Route::resource('user', 'UserController');
     Route::resource('category', 'CategoryController');
-    
+    Route::get('/', 'HomeController@index')->name('home');
 });

@@ -14,7 +14,7 @@ class StudentProblemAcceptTime extends Migration
      */
     public function up()
     {
-        Schema::create('student_problem_accept_count', function (Blueprint $table) {
+        Schema::create('student_problem_accept_time', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
@@ -32,6 +32,6 @@ class StudentProblemAcceptTime extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_status');
+        Schema::dropIfExists('student_problem_accept_time');
     }
 }
