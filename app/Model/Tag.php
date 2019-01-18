@@ -3,7 +3,7 @@
  *
  * Created by Dream.
  * User: Boxjan
- * Datetime: 2019-01-16 15:34
+ * Datetime: 2019-01-18 18:43
  */
 
 namespace App\Model;
@@ -11,11 +11,11 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Tag extends Model
 {
-    protected $table = 'category';
+    protected $table = 'tag';
 
     public function problems() {
-        return $this->hasMany('App\Model\Problem');
+        $this->belongsToMany('App\Model\Problem', 'problem_tag');
     }
 }

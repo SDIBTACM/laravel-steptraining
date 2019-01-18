@@ -14,6 +14,8 @@ class StudentAccount extends Model
 {
     protected $table = 'student_account';
 
-
+    public function student() {
+        $this->belongsTo('App\Model\Student');
+    }
 
 }
