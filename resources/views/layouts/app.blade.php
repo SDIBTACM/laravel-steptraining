@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ isset($title) ? $title . ' | ': '' .config('app.name', 'Laravel') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -40,7 +40,7 @@
                                 Online Judge
                             </a>
 
-                            <a class="navbar-item">
+                            <a class="navbar-item" href="{{ route('home') }}">
                                 {{ __('Statistics') }}
                             </a>
 
@@ -87,7 +87,7 @@
             <el-footer id="footer">
                 <p>© 2018 - SDIBT Step Training - <a href="https://github.com/sdibtacm/steptraining" target="_blank"> Github </a></p>
                 <p>run in {{ printf("%.5f", microtime(true) - LARAVEL_START) }} in seconds.</p>
-                Powered by <a target="_blank" href="https://boxjan.com"> Boxjan </a> &amp; <a href="https://github.com/sdibtacm"> SDIBT ACM Team </a><br>
+            <p>Powered by <a target="_blank" href="https://boxjan.com"> Boxjan </a> &amp; <a href="https://github.com/sdibtacm"> SDIBT ACM Team </a><br></p>
             </el-footer>
         </el-container>
     </div>
@@ -117,3 +117,9 @@
     })
 </script>
 </html>
+<script>
+    import ElFooter from "../../../public/js/app";
+    export default {
+        components: {ElFooter}
+    }
+</script>

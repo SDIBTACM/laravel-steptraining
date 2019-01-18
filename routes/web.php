@@ -27,7 +27,7 @@ Route::get('/plan/{plan}', 'PlanController@show')->name('plan.show');
 Route::get('/plan', 'PlanController@list')->name('plan.list');
 
 // Admin
-Route::prefix('admin/')->namespace('Admin')->middleware(['auth'])->name('admin.')->group(function () {
+Route::prefix('/admin/')->namespace('Admin')->middleware(['auth'])->name('admin.')->group(function () {
 
     Route::resource('plan', 'PlanController');
     Route::resource('student', 'StudentController');
@@ -36,3 +36,8 @@ Route::prefix('admin/')->namespace('Admin')->middleware(['auth'])->name('admin.'
     Route::resource('category', 'CategoryController');
     Route::get('/', 'HomeController@index')->name('home');
 });
+
+Route::get('/teapot', function () {
+    \App\Log::info('some one found a teapot');
+    abort(418);
+})->name('teapot');
