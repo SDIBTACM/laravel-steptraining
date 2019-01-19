@@ -41,3 +41,5 @@ Route::get('/teapot', function () {
     \App\Log::info('some one found a teapot');
     abort(418);
 })->name('teapot');
+
+Route::post('/analytics', 'AnalyticsController@index')->name('analytics');

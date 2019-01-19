@@ -110,16 +110,17 @@
             };
         },
         methods: {
-            MenuSelect(href) {
-                window.location.href = href;
-            }
+        },
+        mounted(){
+            axios.post('{{ route('analytics') }}',{
+                refer:document.referrer,
+                screen: screen.width.toString() + 'x' + screen.height.toString(),
+                link: window.location.href,
+            });
         }
     })
 </script>
-</html>
 <script>
-    import ElFooter from "../../../public/js/app";
-    export default {
-        components: {ElFooter}
-    }
+
 </script>
+</html>
