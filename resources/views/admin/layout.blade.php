@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title . ' | ': '' .config('app.name', 'Laravel') }}</title>
+    <title>{{ isset($title) ? $title . ' | ': ''}} {{ config('app.name', 'Laravel') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -15,63 +15,84 @@
 
 <body>
 <div id="app">
-    <el-container>
+    <div class="container-fluid">
         <el-header>
-            <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <a class="navbar-item" href="{{ route('home') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
 
-                    <a role="button" class="navbar-burger burger " aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                        <span aria-hidden="true"></span>
-                    </a>
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+
+                        <li class="">
+                            <a class="nav-link" href="{{ route('admin.plan.index') }}">
+                                {{ __('Plan') }}
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="nav-link" href="{{ route('admin.problem.index') }}">
+                                {{ __('Problem') }}
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="nav-link" href="{{ route('admin.student.index') }}">
+                                {{ __('Student') }}
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="nav-link" href="{{ route('admin.category.index') }}">
+                                {{ __('Category') }}
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="nav-link" href="{{ route('admin.user.index') }}">
+                                {{ __('User') }}
+                            </a>
+                        </li>
+
+                    </ul>
+
                 </div>
 
-                <div id="navbarMenu" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item" href="{{ route('admin.plan.index') }}">
-                            {{ __('Plan') }}
-                        </a>
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login_page') }}">{{ __('Login') }}</a>
+                        </li>
+                    @else
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Welcome you: {{ is_null(Auth::user()->nickname) ? Auth::user()->nickname : Auth::user()->username }}
+                            </a>
 
-                        <a class="navbar-item" href="{{ route('admin.problem.index') }}">
-                            {{ __('Problem') }}
-                        </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('admin.plan.index') }}">
+                                    {{ __('Manager') }}
+                                </a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
 
-                        <a class="navbar-item" href="{{ route('admin.student.index') }}">
-                            {{ __('Student') }}
-                        </a>
-
-                        <a class="navbar-item" href="{{ route('admin.category.index') }}">
-                            {{ __('Category') }}
-                        </a>
-
-                        <a class="navbar-item" href="{{ route('admin.user.index') }}">
-                            {{ __('User') }}
-                        </a>
-
-
-                    </div>
-
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                @guest
-                                    <a class="navbar-item is-light" href="{{ route('login_page') }}">
-                                        Log in
-                                    </a>
-                                @else
-                                    <p> Welcome you: {{is_null(Auth::user()->nickname) ? Auth::user()->nickname : Auth::user()->username }} </p>
-                                    <a class="navbar-item is-primary" href="{{ route('logout') }}">
-                                        Log out
-                                    </a>
-                                @endguest
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </li>
+                    @endguest
+                </ul>
             </nav>
 
         </el-header>
@@ -85,7 +106,7 @@
             <p>run in {{ printf("%.5f", microtime(true) - LARAVEL_START) }} in seconds.</p>
             <p>Powered by <a target="_blank" href="https://boxjan.com"> Boxjan </a> &amp; <a href="https://github.com/sdibtacm"> SDIBT ACM Team </a></p>
         </el-footer>
-    </el-container>
+    </div>
 </div>
 
 </body>

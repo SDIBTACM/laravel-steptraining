@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($title) ? $title . ' | ': '' .config('app.name', 'Laravel') }}</title>
+    <title>{{ isset($title) ? $title . ' | ' : ''}} {{ config('app.name', 'Laravel') }}</title>
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -21,60 +21,77 @@
     <div id="app">
         <el-container>
             <el-header>
-                <nav class="navbar is-transparent" role="navigation" aria-label="main navigation">
-                    <div class="navbar-brand">
-                        <a class="navbar-item" href="{{ route('home') }}">
-                            {{ config('app.name', 'Laravel') }}
-                        </a>
 
-                        <a role="button" class="navbar-burger burger " aria-label="menu" aria-expanded="false" data-target="navbarMenu">
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                            <span aria-hidden="true"></span>
-                        </a>
-                    </div>
+                <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                    <div id="navbarMenu" class="navbar-menu">
-                        <div class="navbar-start">
-                            <a class="navbar-item" href="//acm.sdibt.edu.cn/JudgeOnline/">
-                                Online Judge
-                            </a>
-
-                            <a class="navbar-item" href="{{ route('home') }}">
-                                {{ __('Statistics') }}
-                            </a>
-
-                            <div class="navbar-item has-dropdown is-hoverable">
-                                <a class="navbar-link">
-                                    {{ __('Training plan') }}
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="//acm.sdibt.edu.cn/JudgeOnline/">
+                                    Online Judge
                                 </a>
-                                <div class="navbar-dropdown is-boxed">
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" id="nav-statistics" href="{{ route('home') }}">
+                                    {{ __('Statistics') }}
+                                </a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="plan-navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Plan
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="plan-navbarDropdown">
+                                    <a class="dropdown-item" id="nav-plan-1"  href="{{ route('plan.show', ['id' => 1]) }}">
+                                        {{ 111 }}
+                                    </a>
                                     @foreach($plans as $key=>$plan)
-                                        <a class="navbar-item" href="{{ route('plan.show', ['id' => $key]) }}">
+                                        <a class="dropdown-item" id="nav-plan-{{ $key }}"  href="{{ route('plan.show', ['id' => $key]) }}">
                                             {{ $plan->name }}
                                         </a>
                                     @endforeach
                                 </div>
-                            </div>
+                            </li>
+                        </ul>
 
-                        </div>
-
-                        <div class="navbar-end">
-                            <div class="navbar-item">
-                                <div class="buttons">
-                                    @guest
-                                    <a class="navbar-item is-light" href="{{ route('login_page') }}">
-                                        Log in
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('login_page') }}">{{ __('Login') }}</a>
+                                </li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Welcome you: {{ is_null(Auth::user()->nickname) ? Auth::user()->nickname : Auth::user()->username }}
                                     </a>
-                                    @else
-                                        <p> Welcome you: {{is_null(Auth::user()->nickname) ? Auth::user()->nickname : Auth::user()->username }} </p>
-                                        <a class="navbar-item is-primary" href="{{ route('logout') }}">
-                                            Log out
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('admin.plan.index') }}">
+                                            {{ __('Manager') }}
                                         </a>
-                                    @endguest
-                                </div>
-                            </div>
-                        </div>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
                     </div>
                 </nav>
 
@@ -112,11 +129,13 @@
         methods: {
         },
         mounted(){
+            @if(!isset($isLoginPage))
             axios.post('{{ route('analytics') }}',{
                 refer:document.referrer,
                 screen: screen.width.toString() + 'x' + screen.height.toString(),
                 link: window.location.href,
             });
+            @endif
         }
     })
 </script>
