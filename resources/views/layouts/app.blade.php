@@ -1,5 +1,5 @@
 @php
-    $plans = compact(\App\Model\Plan::all());
+    $plans = \App\Model\Plan::all();
 @endphp
 
 <!DOCTYPE html>
@@ -19,8 +19,8 @@
 
 <body>
     <div id="app">
-        <el-container>
-            <el-header>
+        <div class="container-fluid">
+            <header>
 
                 <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -50,11 +50,8 @@
                                     Plan
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="plan-navbarDropdown">
-                                    <a class="dropdown-item" id="nav-plan-1"  href="{{ route('plan.show', ['id' => 1]) }}">
-                                        {{ 111 }}
-                                    </a>
                                     @foreach($plans as $key=>$plan)
-                                        <a class="dropdown-item" id="nav-plan-{{ $key }}"  href="{{ route('plan.show', ['id' => $key]) }}">
+                                        <a class="dropdown-item" id="nav-plan-{{ $plan->id }}"  href="{{ route('plan.show', ['id' => $plan->id]) }}">
                                             {{ $plan->name }}
                                         </a>
                                     @endforeach
@@ -95,18 +92,18 @@
                     </div>
                 </nav>
 
-            </el-header>
+            </header>
 
-            <el-main>
+            <main>
                 @yield('main')
-            </el-main>
+            </main>
 
-            <el-footer id="footer">
+            <footer id="footer">
                 <p>© 2018 - SDIBT Step Training - <a href="https://github.com/sdibtacm/steptraining" target="_blank"> Github </a></p>
                 <p>run in {{ printf("%.5f", microtime(true) - LARAVEL_START) }} in seconds.</p>
-            <p>Powered by <a target="_blank" href="https://boxjan.com"> Boxjan </a> &amp; <a href="https://github.com/sdibtacm"> SDIBT ACM Team </a><br></p>
-            </el-footer>
-        </el-container>
+                <p>Powered by <a target="_blank" href="https://boxjan.com"> Boxjan </a> &amp; <a href="https://github.com/sdibtacm"> SDIBT ACM Team </a><br></p>
+            </footer>
+        </div>
     </div>
 
 </body>
@@ -118,24 +115,23 @@
     if (typeof data == "undefined") {
         data = {};
     }
-    new Vue({
+    let vue = new Vue({
         mixins: [data],
         el: '#app',
         data: function() {
             return {
-                {{--activeIndex: "{{ isset($choose)?$choose:"null" }}",--}}
             };
         },
         methods: {
         },
         mounted(){
-            @if(!isset($isLoginPage))
-            axios.post('{{ route('analytics') }}',{
-                refer:document.referrer,
-                screen: screen.width.toString() + 'x' + screen.height.toString(),
-                link: window.location.href,
-            });
-            @endif
+            {{--@if(!isset($isAuthPage))--}}
+            {{--axios.post('{{ route('analytics') }}',{--}}
+                {{--refer:document.referrer,--}}
+                {{--screen: screen.width.toString() + 'x' + screen.height.toString(),--}}
+                {{--link: window.location.href,--}}
+            {{--});--}}
+            {{--@endif--}}
         }
     })
 </script>

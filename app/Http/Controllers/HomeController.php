@@ -11,7 +11,7 @@ class HomeController extends Controller
      */
 
     public function index() {
-        $students = null;//Student::where('is_show', 0)->get();
+        $students = Student::where('is_show', 0)->get();
 
         return view('home',[
             'choose' => 'statistics',

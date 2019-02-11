@@ -29,7 +29,7 @@ class Plan extends Model
      */
 
     public function problems() {
-        return $this->belongsToMany('App\Model\Problem', 'plan_student');
+        return $this->belongsToMany('App\Model\Problem', 'plan_problem');
     }
 
 }

@@ -29,12 +29,33 @@ Route::get('/plan', 'PlanController@list')->name('plan.list');
 // Admin
 Route::prefix('/admin/')->namespace('Admin')->middleware(['auth'])->name('admin.')->group(function () {
 
-    Route::resource('plan', 'PlanController');
-    Route::resource('student', 'StudentController');
-    Route::resource('problem', 'ProblemController')->except(['update', 'edit']);
+    // Plan Manage
+    Route::resource('plan', 'PlanController')->except(['create', 'edit', 'show']);
+    Route::get('/plan/{plan}/student/', 'PlanManagerController@student')->name('plan.student_form');
+    Route::get('/plan/{plan}/problem/', 'PlanManagerController@problem')->name('plan.problem_form');
+    Route::post('/plan/{plan}/student/', 'PlanManagerController@addStudent')->name('plan.student.add');
+    Route::post('/plan/{plan}/problem/', 'PlanManagerController@addProblem')->name('plan.problem.add');
+    Route::delete('/plan/{plan}/student/', 'PlanManagerController@deleteStudent')->name('plan.student.delete');
+    Route::delete('/plan/{plan}/problem/', 'PlanManagerController@deleteProblem')->name('plan.problem.delete');
+
+    // Student Manage
+    Route::resource('student', 'StudentController')->except(['create', 'edit', 'show']);
+    Route::get('/student/{student}/account/', 'StudentAccountController@index')->name('student.account_form');
+    Route::post('/student/{student}/account/', 'StudentAccountController@update')->name('student.account_update');
+
+    // Problem Manage
+    Route::resource('problem', 'ProblemController')->except(['create', 'edit', 'show']);
+
+    // User Manage
     Route::resource('user', 'UserController');
-    Route::resource('category', 'CategoryController');
-    Route::get('/', 'HomeController@index')->name('home');
+
+    //
+    Route::resource('category', 'CategoryController')->except(['create', 'edit', 'show']);
+
+    Route::get('/', function () {
+        return redirect()->route('admin.plan.index');
+    })->name('home');
+    //Route::get('logs', 'LogController@index')->name('logs');
 });
 
 Route::get('/teapot', function () {

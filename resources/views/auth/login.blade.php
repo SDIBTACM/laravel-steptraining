@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @php
- $isLoginPage = true;
+    $isAuthPage = true;
 @endphp
 
 @section('main')

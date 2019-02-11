@@ -1,22 +1,17 @@
 <?php
-
 /**
  *
  * Created by Dream.
  * User: Boxjan
- * Datetime: 2019-01-09 20:05
+ * Datetime: 2019-01-13 17:38
  */
-
 
 namespace App\Http\Controllers\Admin;
 
-use App\Log;
-use App\Model\Plan;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class PlanController extends Controller
+use App\Http\Controllers\Controller;
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,9 +20,18 @@ class PlanController extends Controller
      */
     public function index()
     {
-        return view('admin.plan.index', ['title' => 'plan manager']);
+        //
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -37,12 +41,29 @@ class PlanController extends Controller
      */
     public function store(Request $request)
     {
-        $plan = new Plan;
-        $plan->name = $request->input('name');
-        $plan->save();
+        //
+    }
 
-        Log::info('User: {} add a plan, name: {}', Auth::user()->username, $plan->name);
-        return date('Y-m-d H:m:s');
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**
@@ -54,11 +75,7 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plan = Plan::find($id);
-        $plan->name = $request->input('name');
-        $plan->save();
-
-        Log::info('User: {} update category: {} to {} ', Auth::user()->username, $plan);
+        //
     }
 
     /**
@@ -69,8 +86,6 @@ class PlanController extends Controller
      */
     public function destroy($id)
     {
-        $oldCategory = Plan::find($id);
-        Log::info('User: {} delete category: {}', Auth::user()->username, $oldCategory);
-        Plan::destroy($id);
+        //
     }
 }

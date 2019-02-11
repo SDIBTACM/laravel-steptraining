@@ -22,7 +22,7 @@ class StudentAccount extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->integer('student_id')->unsigned()->index();
-            $table->string('origin_oj', 16)->index();
+            $table->string('origin_oj', 32)->index();
             $table->string('account_id', 64)->index();
         });
     }

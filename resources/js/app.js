@@ -10,7 +10,7 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import ElementUI from 'element-ui';
-import $ from 'jquery';
+
 require('bootstrap')
 
 /**
@@ -20,4 +20,4 @@ require('bootstrap')
  */
 
 Vue.use(ElementUI);
-Vue.use($);
+

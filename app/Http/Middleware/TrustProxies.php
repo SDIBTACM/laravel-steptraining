@@ -11,7 +11,7 @@ class TrustProxies extends Middleware
     public function __construct(Repository $config)
     {
         parent::__construct($config);
-        $this->proxies = env('TRUST_PROXIES_IP');
+        $this->proxies = json_decode(env('TRUST_PROXIES_IP'), true);
     }
 
     /**

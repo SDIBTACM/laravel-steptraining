@@ -33,7 +33,7 @@ class LoginController extends Controller
         $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.plan.index');
+            return redirect()->intended(route('admin.plan.index'));
         }
 
         $password_hash = DB::table('user')->where('username', $credentials['username'])->value('password');
@@ -47,7 +47,7 @@ class LoginController extends Controller
             Auth::loginUsingId($user->id);
             $user->save();
 
-            return redirect()->route('admin.plan.index');
+            return redirect()->intended(route('admin.plan.index'));
         }
 
         Log::warning("username: {}, ip: {} Login Fail!", $credentials['username'], $request->ip());

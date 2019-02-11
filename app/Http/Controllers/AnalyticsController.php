@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Cookie;
 class AnalyticsController extends Controller
 {
     public function index(Request $request) {
+
         $data = new CollectedData();
 
         $data->ua = $request->header('User-Agent');
@@ -28,8 +29,7 @@ class AnalyticsController extends Controller
         $data->link = $request->post('link');
         $data->screen = $request->post('screen');
 
-
         GoogleAnalytics::sent($data);
-        return response('')->cookie('clientId', $data->clientId, 5256000);
+        response('')->cookie('clientId', $data->clientId, 5256000);
     }
 }
