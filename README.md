@@ -9,8 +9,8 @@ StepTraining 的 Laravel 重构版本，用以熟悉 Laravel 框架， 本项目
 - [Laravel/Laravel](https://laravel.com/), [docs](https://laravel.com/docs/5.7), [Github](https://github.com/laravel/laravel)
 - [ElemeFE/element](https://element.eleme.io/), [docs](https://element.eleme.io/#/zh-CN/component/installation), [Github](https://github.com/ElemeFE/element)
 - [twbs/bootstrap](https://getbootstrap.com/), [docs](https://getbootstrap.com/docs/4.2/getting-started/introduction/), [Github](https://github.com/twbs/bootstrap)
-- [vuejs/vue](https://vuejs.org/), [docs](https://vuejs.org/v2/guide/], [Github](https://github.com/vuejs/vue)
-- [axios/axios](https://github.com/axios/axios], [docs](https://github.com/axios/axios/blob/master/README.md)
+- [vuejs/vue](https://vuejs.org/), [docs](https://vuejs.org/v2/guide/), [Github](https://github.com/vuejs/vue)
+- [axios/axios](https://github.com/axios/axios), [docs](https://github.com/axios/axios/blob/master/README.md)
 - [jQuery/jQuery](https://jquery.com/), [docs](https://api.jquery.com/), [Github](https://github.com/jquery/jquery)
 
 项目使用的框架/组件大部分已列出，由Laravel，elememt所引用的组件不再列举
