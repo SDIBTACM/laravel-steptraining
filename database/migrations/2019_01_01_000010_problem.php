@@ -21,6 +21,7 @@ class Problem extends Migration
             $table->string('origin_oj', 32)->index();
             $table->string('origin_problem_id', 16)->index();
             $table->integer('category_id')->index()->default(1);
+            $table->unique(['origin_oj', 'origin_problem_id']);
         });
     }
 

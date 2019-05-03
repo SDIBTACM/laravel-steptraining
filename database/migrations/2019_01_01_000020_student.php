@@ -19,10 +19,10 @@ class Student extends Migration
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->string('name', 16)->index();
-            $table->string('class', 32)->default('');
+            $table->string('class', 32);
             $table->tinyInteger('is_update')->default(0)->index();
             $table->tinyInteger('is_show')->default(0)->index();
-            $table->primary(['name', 'class']);
+            $table->unique(['name', 'class']);
         });
     }
 
